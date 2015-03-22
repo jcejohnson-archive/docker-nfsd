@@ -6,6 +6,11 @@ then
   echo "/srv/nfs4       *(rw,crossmnt,sync,nohide,insecure,no_root_squash)" >> /etc/exports
 fi
 
+if [ ! -d /srv/nfs4 ]
+then
+  mkdir -pv /srv/nfs4
+fi
+
 # If environment variables were provided by 'docker run ... -e foo=bar',
 # use them here to set the actual hostname. This is mostly cosmetic but
 # it bothers me that --net=host uses the host's hostname.
