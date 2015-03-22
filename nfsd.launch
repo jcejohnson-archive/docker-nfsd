@@ -2,8 +2,8 @@
 
 # Sample script for launching the nfsd container
 
-rm -f /var/run/nfsd
-mknod /var/run/nfsd p
+rm -f /var/run/nfsd-control
+mknod /var/run/nfsd-control p
 docker rm nfsd
 
 # docker run --privileged -d \
@@ -31,12 +31,15 @@ docker run -d \
   --net=host    \
   --name nfsd    \
   \
-  -e nfs_hostname=nfshost      \
-  -e nfs_domainname=tragus.org  \
-  -e nfs_ipaddress=192.168.42.51 \
+  -e apache_ipaddress=192.168.42.51 \
   \
-  -v /usr/local/etc/exports:/etc/exports     \
-  -v /var/run/nfsd:/var/run/container-control \
+  -e nfsd_hostname=nfshost      \
+  -e nfsd_domainname=tragus.org  \
+  -e nfsd_ipaddress=192.168.42.51 \
+  \
+  -v /usr/local/containers/nfsd/etc:/etc    \
+  -v /var/run/nfsd-control:/var/run/container-control \
+  \
   tragus/nfsd
 
 :

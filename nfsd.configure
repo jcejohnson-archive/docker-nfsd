@@ -10,10 +10,10 @@ fi
 # use them here to set the actual hostname. This is mostly cosmetic but
 # it bothers me that --net=host uses the host's hostname.
 
-if [ -n "$nfs_hostname" -a -n "$nfs_domainname" -a -n "$nfs_ipaddress" ]
+if [ -n "$nfsd_hostname" -a -n "$nfsd_domainname" -a -n "$nfsd_ipaddress" ]
 then
-  echo "${nfs_ipaddress}    ${nfs_hostname}.${nfs_domainname} ${nfs_hostname}" >> /etc/hosts
-  hostname ${nfs_hostname}
+  echo "${nfsd_ipaddress}    ${nfsd_hostname}.${nfsd_domainname} ${nfsd_hostname}" >> /etc/hosts
+  hostname ${nfsd_hostname}
 fi
 
 :
