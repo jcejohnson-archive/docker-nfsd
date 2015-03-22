@@ -1,0 +1,6 @@
+#!/bin/bash
+
+/etc/init.d/nfs-kernel-server stop
+/etc/init.d/rpcbind stop
+
+:

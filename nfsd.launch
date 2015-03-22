@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Sample script for launching the nfsd container
+
+rm -f /var/run/nfsd
+mknod /var/run/nfsd p
+docker rm nfsd
+
+# docker run --privileged -d \
+#   -p 192.168.42.51:80:80/tcp \
+#   -p 192.168.42.51:111:111/tcp \
+#   -p 192.168.42.51:111:111/udp \
+#   -p 192.168.42.51:2049:2049/tcp \
+#   -p 192.168.42.51:2049:2049/udp \
+
+# docker run --privileged -d --net=host \
+
+# docker run --privileged -d \
+#   -p 192.168.42.51:2049:2049/tcp \
+
+# I cannot seem to get the port publication correct.
+# It works when I use --net=host to use the host's
+# network stack. It's gross but it'll do for now.
+#
+# I don't know if this is operator error on my part,
+# something weird with docker/iptables or something
+# weird with the way nfs itself works.
+
+docker run -d \
+  --privileged \
+  --net=host    \
+  --name nfsd    \
+  \
+  -e nfs_hostname=nfshost      \
+  -e nfs_domainname=tragus.org  \
+  -e nfs_ipaddress=192.168.42.51 \
+  \
+  -v /usr/local/etc/exports:/etc/exports     \
+  -v /var/run/nfsd:/var/run/container-control \
+  tragus/nfsd
+
+:

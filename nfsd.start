@@ -1,0 +1,8 @@
+#!/bin/bash
+
+/etc/init.d/rpcbind start
+/etc/init.d/nfs-kernel-server start
+
+# TODO - Launch inotify in the background to watch for changes to /etc/exports?
+
+:

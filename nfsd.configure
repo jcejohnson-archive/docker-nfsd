@@ -1,0 +1,19 @@
+#!/bin/bash
+
+grep '^/srv/nfs4' /etc/exports
+if [ $? -ne 0 ]
+then
+  echo "/srv/nfs4       *(rw,crossmnt,sync,nohide,insecure,no_root_squash)" >> /etc/exports
+fi
+
+# If environment variables were provided by 'docker run ... -e foo=bar',
+# use them here to set the actual hostname. This is mostly cosmetic but
+# it bothers me that --net=host uses the host's hostname.
+
+if [ -n "$nfs_hostname" -a -n "$nfs_domainname" -a -n "$nfs_ipaddress" ]
+then
+  echo "${nfs_ipaddress}    ${nfs_hostname}.${nfs_domainname} ${nfs_hostname}" >> /etc/hosts
+  hostname ${nfs_hostname}
+fi
+
+:
