@@ -1,6 +1,12 @@
 ## tragus/nfsd
 tragus/webmin with a basic nfs server installed.
 
+## Note to self
+
+Using --net=host I've had good luck with pandrew/nfs-server.
+Except for my weird apache/webmin base image stuff, this is essentially the
+same and should behave.
+
 ## Why?
 
 I use NFS in my home network to share storage between multiple physical and
@@ -72,6 +78,12 @@ easy route and extracted all of /etc from my first boot of the image into
 /usr/local/containers/<containername>/etc. This gives me persistence of all
 of their configuration and I can use a similar technique later for managing
 the logs and other bits if I want.
+
+## About nfsd Processes
+
+When you 'ps -aef' on the container host you will see several nfsd* processes.
+Thse are actually bits of the kernel and very necessary for the in-container
+kernel-nfs-server to function.
 
 ## TODO
 
