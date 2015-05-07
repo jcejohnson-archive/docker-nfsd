@@ -1,5 +1,8 @@
 FROM tragus/webmin
 
+# We build this off of the webmin image which will give us an easy way to
+# administer our NFS server.
+
 MAINTAINER James Johnson
 
 RUN apt-get update && \
@@ -12,10 +15,7 @@ ADD nfsd.configure   /usr/local/bin/nfsd.configure
 RUN chmod +x /usr/local/bin/nfsd.configure && /usr/local/bin/nfsd.configure
 
 # Install any other scripts
-ADD nfsd.start      /usr/local/bin/apache2.start.d/nfsd.start
-ADD nfsd.stop       /usr/local/bin/apache2.stop.d/nfsd.stop
+ADD nfsd.start      /usr/local/lib/container-controller/start/
+ADD nfsd.stop       /usr/local/lib/container-controller/stop/
 
-# We build this off of the webmin image which, in turn, is built off of
-# the apache image. webmin will give us an easy way to administer our
-# nfsd image. Because of this, we can use the apache2.start script.
-ENTRYPOINT ["/usr/local/bin/apache2.start"]
+ENTRYPOINT ["/usr/local/bin/container-controller.start"]

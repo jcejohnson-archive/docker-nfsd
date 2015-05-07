@@ -5,8 +5,6 @@
 # Be sure we have /proc/fs/nfsd
 systemctl start proc-fs-nfsd.mount
 
-rm -f /var/run/nfsd-control
-mknod /var/run/nfsd-control p
 docker rm nfsd
 
 # docker run --privileged -d \

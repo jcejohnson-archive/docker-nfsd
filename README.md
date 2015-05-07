@@ -82,7 +82,7 @@ the logs and other bits if I want.
 ## About nfsd Processes
 
 When you 'ps -aef' on the container host you will see several nfsd* processes.
-Thse are actually bits of the kernel and very necessary for the in-container
+These are actually bits of the kernel and very necessary for the in-container
 kernel-nfs-server to function.
 
 ## TODO
@@ -92,4 +92,6 @@ This is gross in lots of ways.
 ## See Also
 Please read the tragus/webmin documentation to for current warnings:
 https://github.com/jcejohnson/docker-webmin
-(That document will point you to tragus/apache which you should also read.)
+(That document will point you to tragus/apache which you should also read. And
+that will point you to tragus/ubuntu which you should *also* read. -- it's
+turtles all the way down...)
